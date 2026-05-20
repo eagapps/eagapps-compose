@@ -63,7 +63,7 @@ services:
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-123}
     healthcheck:
       interval: 5s
-      retries: 5
+      retries: 100
       start_period: 5s
       test:
         - CMD
