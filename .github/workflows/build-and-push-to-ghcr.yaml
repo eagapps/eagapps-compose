@@ -26,7 +26,8 @@ jobs:
             "url": "${{ secrets.EAGAPPS_URL }}",
             "branch": "${{ secrets.EAGAPPS_BRANCH }}"
           }
-          
+          EOF
+                  
       - name: Build image
         run: >
           docker build 
