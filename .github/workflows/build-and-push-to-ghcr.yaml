@@ -38,6 +38,7 @@ jobs:
           --file=frappe_docker/images/custom/Containerfile ./frappe_docker
       
       - name: Remove apps.json
+        if: "${{ always() }}"
         run: rm apps.json
       
       - name: Log in to registry
