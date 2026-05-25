@@ -22,10 +22,12 @@ jobs:
       - name: Setup app.json
         run: |
           cat > apps.json <<EOF
-          {
-            "url": "${{ secrets.EAGAPPS_URL }}",
-            "branch": "${{ secrets.EAGAPPS_BRANCH }}"
-          }
+          [
+            {
+              "url": "${{ secrets.EAGAPPS_URL }}",
+              "branch": "${{ secrets.EAGAPPS_BRANCH }}"
+            }
+          ]
           EOF
                   
       - name: Build image
