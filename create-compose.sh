@@ -5,6 +5,7 @@ docker compose \
     -f overrides/compose.mariadb.yaml \
     -f overrides/compose.redis.yaml \
     -f overrides/compose.noproxy.yaml \
+    -f overrides/compose.migrator.yaml \
     config \
     --no-env-resolution \
     --no-interpolate \
