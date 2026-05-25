@@ -51,7 +51,7 @@ jobs:
       
       - name: Push image
         run: |
-          IMAGE_ID=ghcr.io/${{ github.repository_owner }}
+          IMAGE_ID=ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}
           # Change any uppercase character into lowercase
           IMAGE_ID=$(echo "$IMAGE_ID" | tr "[A-Z]" "[a-z]")
           # Strip the git ref prefix from te version
