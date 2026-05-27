@@ -33,7 +33,7 @@ services:
           echo "[migrator] Migration disabled";
           exit 0;
         fi;
-        if [ -z "$$(find sites -mindepth 2 -maxdepth 2 -name site_config.json 2>/dev/null)" ]; then
+        if [ -z "$(find sites -mindepth 2 -maxdepth 2 -name site_config.json 2>/dev/null)" ]; then
           echo "[migrator] No sites found, skipping migration";
           exit 0;
         fi;
