@@ -3,11 +3,11 @@ on:
   workflow_dispatch:
     inputs:
       frappe-branch:
-        description: 'Frappe branch against which to build the image. Basically, the version of Frappe to use (default: version-16)'
+        description: 'Frappe branch against which to build the image. Basically, the version of Frappe to use'
         required: false
         default: 'version-16'
       image-tag:
-        description: 'Tag to push the image with (default: latest)'
+        description: 'Tag to push the image with'
         required: false
         default: 'latest'
 env:
