@@ -22,6 +22,7 @@ env:
   REGISTRY: ghcr.io
   IMAGE_NAME: eagapps
   PYTHON_VERSION: 3.14
+  APPS_JSON_PATH: ./frappe_docker/apps.json
 
 jobs:
   push:
@@ -48,7 +49,7 @@ jobs:
 
       - name: Setup app.json
         run: |
-          cat > apps.json <<EOF
+          cat > ${{ env.APPS_JSON_PATH }} <<EOF
           [
             {
               "url": "${{ secrets.EAGAPPS_URL }}",
@@ -56,7 +57,6 @@ jobs:
             }
           ]
           EOF
-          mv apps.json ./frappe_docker/apps.json
 
       - name: Build and push
         uses: docker/build-push-action@v7
@@ -71,8 +71,8 @@ jobs:
             FRAPPE_BRANCH: ${{ inputs.frappe-branch}}
             PYTHON_VERSION: ${{ env.PYTHON_VERSION }}
           secret-files: |
-            apps_json=apps.json
+            apps_json=${{ env.APPS_JSON_PATH }}
 
       - name: Remove apps.json
         if: "${{ always() }}"
-        run: rm ./frappe_docker/apps.json
+        run: rm ${{ env.APPS_JSON_PATH }}
