@@ -3,13 +3,21 @@ on:
   workflow_dispatch:
     inputs:
       frappe-branch:
-        description: 'Frappe branch against which to build the image. Basically, the version of Frappe to use'
+        type: choice
+        description: "Frappe branch against which to build the image. Basically, the version of Frappe to use"
         required: false
-        default: 'version-16'
+        default: "version-16"
+        options:
+          - version-16
+          - version-15
       image-tag:
-        description: 'Tag to push the image with'
+        type: choice
+        description: "Tag to push the image with"
         required: false
-        default: 'latest'
+        default: "latest"
+        options:
+          - latest
+          - latest-frappe-15
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: eagapps
