@@ -1,7 +1,15 @@
 name: Build and Push Eagapps Image
 on:
   workflow_dispatch:
-
+    inputs:
+      frappe-branch:
+        description: 'Frappe branch against which to build the image. Basically, the version of Frappe to use (default: version-16)'
+        required: false
+        default: 'version-16'
+      image-tag:
+        description: 'Tag to push the image with (default: latest)'
+        required: false
+        default: 'latest'
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: eagapps
@@ -49,10 +57,10 @@ jobs:
           file: ./frappe_docker/images/custom/Containerfile
           push: true
           tags: |
-            ${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:latest
+            ${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:${{ inputs.image-tag }}
           build-args: |
             FRAPPE_PATH: https://github.com/frappe/frappe
-            FRAPPE_BRANCH: version-16
+            FRAPPE_BRANCH: ${{ inputs.frappe-branch}}
             PYTHON_VERSION: ${{ env.PYTHON_VERSION }}
           secret-files: |
             apps_json=apps.json
