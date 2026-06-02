@@ -54,7 +54,7 @@ jobs:
             FRAPPE_PATH: https://github.com/frappe/frappe
             FRAPPE_BRANCH: version-16
             PYTHON_VERSION: ${{ env.PYTHON_VERSION }}
-          secrets-files: |
+          secret-files: |
             apps_json=apps.json
 
       - name: Remove apps.json
