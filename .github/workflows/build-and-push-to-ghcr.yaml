@@ -65,7 +65,7 @@ jobs:
           file: ./frappe_docker/images/custom/Containerfile
           push: true
           tags: |
-            ${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:${{ inputs.image-tag }}
+            ${{ env.REGISTRY }}/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:${{ inputs.image-tag }}
           build-args: |
             FRAPPE_PATH: https://github.com/frappe/frappe
             FRAPPE_BRANCH: ${{ inputs.frappe-branch}}
