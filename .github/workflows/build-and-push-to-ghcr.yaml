@@ -44,9 +44,6 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v4
-
       - name: Setup app.json
         run: |
           cat > ${{ env.APPS_JSON_PATH }} <<EOF
