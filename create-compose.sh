@@ -9,4 +9,5 @@ docker compose \
     config \
     --no-env-resolution \
     --no-interpolate \
+    --no-normalize \
     > docker-compose.yaml
