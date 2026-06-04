@@ -43,7 +43,7 @@ jobs:
               "branch": "${{ env.INSIGHTS_BRANCH }}"
             },
             {
-              "url": "https://github.com/frappe/print-designer",
+              "url": "https://github.com/frappe/print_designer",
               "branch": "${{ env.PRINT_DESIGNER_BRANCH }}"
             }
           ]
