@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: eagapps
+  IMAGE_NAME: helpdesk
   PYTHON_VERSION: 3.14
   APPS_JSON_PATH: ./frappe_docker/apps.json
   HELPDESK_BRANCH: main
