@@ -1,0 +1,69 @@
+name: Build and Push Helpdesk Image
+on:
+  workflow_dispatch:
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: eagapps
+  PYTHON_VERSION: 3.14
+  APPS_JSON_PATH: ./frappe_docker/apps.json
+  HELPDESK_BRANCH: main
+  INSIGHTS_BRANCH: main
+  PRINT_DESIGNER_BRANCH: develop
+
+jobs:
+  push:
+    if: ${{ github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+    steps:
+      - name: Checkout repository code
+        uses: actions/checkout@v6
+        with:
+          submodules: true
+
+      - name: Login to Registry
+        uses: docker/login-action@v4
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup app.json
+        run: |
+          cat > ${{ env.APPS_JSON_PATH }} <<EOF
+          [
+            {
+              "url": "https://github.com/frappe/helpdesk",
+              "branch": "${{ env.HELPDESK_BRANCH }}"
+            },
+            {
+              "url": "https://github.com/frappe/insights",
+              "branch": "${{ env.INSIGHTS_BRANCH }}"
+            },
+            {
+              "url": "https://github.com/frappe/print-designer",
+              "branch": "${{ env.PRINT_DESIGNER_BRANCH }}"
+            }
+          ]
+          EOF
+
+      - name: Build and push
+        uses: docker/build-push-action@v7
+        with:
+          context: ./frappe_docker
+          file: ./frappe_docker/images/custom/Containerfile
+          push: true
+          tags: |
+            ${{ env.REGISTRY }}/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:latest
+          build-args: |
+            FRAPPE_PATH=https://github.com/frappe/frappe
+            FRAPPE_BRANCH=version-15
+            PYTHON_VERSION=${{ env.PYTHON_VERSION }}
+          secret-files: |
+            apps_json=${{ env.APPS_JSON_PATH }}
+
+      - name: Remove apps.json
+        if: "${{ always() }}"
+        run: rm ${{ env.APPS_JSON_PATH }}
