@@ -51,6 +51,10 @@ jobs:
             {
               "url": "${{ secrets.EAGAPPS_URL }}",
               "branch": "${{ secrets.EAGAPPS_BRANCH }}"
+            },
+            {
+              "url": "https://github.com/frappe/insights",
+              "branch": "v3.12.5"
             }
           ]
           EOF
