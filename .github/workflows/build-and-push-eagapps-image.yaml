@@ -54,7 +54,7 @@ jobs:
             },
             {
               "url": "https://github.com/frappe/insights",
-              "branch": "v3.12.5"
+              "branch": "version-3"
             }
           ]
           EOF
