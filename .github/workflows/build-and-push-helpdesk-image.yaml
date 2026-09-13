@@ -8,7 +8,7 @@ env:
   APPS_JSON_PATH: ./frappe_docker/apps.json
   HELPDESK_BRANCH: main
   TELEPHONY_BRANCH: develop
-  INSIGHTS_BRANCH: version-3
+  INSIGHTS_BRANCH: main
   PRINT_DESIGNER_BRANCH: develop
 
 jobs:
